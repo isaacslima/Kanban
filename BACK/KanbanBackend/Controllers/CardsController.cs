@@ -4,11 +4,11 @@ namespace KanbanBackend.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class CardController : ControllerBase
+    public class CardsController : ControllerBase
     {
-        private readonly ILogger<CardController> _logger;
+        private readonly ILogger<CardsController> _logger;
 
-        public CardController(ILogger<CardController> logger)
+        public CardsController(ILogger<CardsController> logger)
         {
             _logger = logger;
         }
