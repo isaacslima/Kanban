@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Core\Application\Kanban.Application\Kanban.Application.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\Kanban.Infrastructure\Kanban.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,6 +1,13 @@
+using Kanban.Infrastructure;
+using Kanban.Application;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+var services = builder.Services;
+ConfigurationManager configuration = builder.Configuration;
+
+services.AddInfrastructure(configuration)
+        .AddApplication();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
