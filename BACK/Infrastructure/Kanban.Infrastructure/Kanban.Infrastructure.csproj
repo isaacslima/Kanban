@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\Core\Application\Kanban.Application\Kanban.Application.csproj" />
+  </ItemGroup>
+
 </Project>
