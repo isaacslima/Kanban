@@ -1,0 +1,61 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33627.172
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KanbanBackend", "KanbanBackend.csproj", "{B4C3797E-566D-4186-A60B-F046012DC87D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kanban.Domain", "..\Core\Domain\Kanban.Domain\Kanban.Domain.csproj", "{6174817B-2810-4F1D-B2BC-A0FC131D4BA4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{82AFC39D-6348-49BC-8D9D-EC67170F3DA2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{4C45D9D8-F425-4621-8925-17561730D353}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{D79AE91E-F9DA-48DA-8C88-A9C12AF8A287}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{6EE1D5B1-2C44-45CE-89DA-4C94A34CE8BC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{AB907B03-C302-4C09-B8FF-241929CB1CC0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kanban.Application", "..\Core\Application\Kanban.Application\Kanban.Application.csproj", "{FBC74CBF-CE30-4DFE-AB8B-C52E67C62DF5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kanban.Infrastructure", "..\Kanban.Infrastructure\Kanban.Infrastructure.csproj", "{403ACFBE-A9F1-4F12-BE98-AD2E699B35C3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B4C3797E-566D-4186-A60B-F046012DC87D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4C3797E-566D-4186-A60B-F046012DC87D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4C3797E-566D-4186-A60B-F046012DC87D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4C3797E-566D-4186-A60B-F046012DC87D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6174817B-2810-4F1D-B2BC-A0FC131D4BA4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6174817B-2810-4F1D-B2BC-A0FC131D4BA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6174817B-2810-4F1D-B2BC-A0FC131D4BA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6174817B-2810-4F1D-B2BC-A0FC131D4BA4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FBC74CBF-CE30-4DFE-AB8B-C52E67C62DF5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FBC74CBF-CE30-4DFE-AB8B-C52E67C62DF5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FBC74CBF-CE30-4DFE-AB8B-C52E67C62DF5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FBC74CBF-CE30-4DFE-AB8B-C52E67C62DF5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{403ACFBE-A9F1-4F12-BE98-AD2E699B35C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{403ACFBE-A9F1-4F12-BE98-AD2E699B35C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{403ACFBE-A9F1-4F12-BE98-AD2E699B35C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{403ACFBE-A9F1-4F12-BE98-AD2E699B35C3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{B4C3797E-566D-4186-A60B-F046012DC87D} = {6EE1D5B1-2C44-45CE-89DA-4C94A34CE8BC}
+		{6174817B-2810-4F1D-B2BC-A0FC131D4BA4} = {4C45D9D8-F425-4621-8925-17561730D353}
+		{4C45D9D8-F425-4621-8925-17561730D353} = {82AFC39D-6348-49BC-8D9D-EC67170F3DA2}
+		{D79AE91E-F9DA-48DA-8C88-A9C12AF8A287} = {82AFC39D-6348-49BC-8D9D-EC67170F3DA2}
+		{FBC74CBF-CE30-4DFE-AB8B-C52E67C62DF5} = {D79AE91E-F9DA-48DA-8C88-A9C12AF8A287}
+		{403ACFBE-A9F1-4F12-BE98-AD2E699B35C3} = {AB907B03-C302-4C09-B8FF-241929CB1CC0}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E76B788D-20B1-48E8-973C-E1EA8DE5DB7A}
+	EndGlobalSection
+EndGlobal
