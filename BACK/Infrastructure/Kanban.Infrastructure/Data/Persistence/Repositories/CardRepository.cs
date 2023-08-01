@@ -1,5 +1,4 @@
 ﻿using Dapper;
-using Kanban.Application.Common.Interfaces;
 using Kanban.Application.Common.Interfaces.Persistence;
 using Kanban.Domain;
 

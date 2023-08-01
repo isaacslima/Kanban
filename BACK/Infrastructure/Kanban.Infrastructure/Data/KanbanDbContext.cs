@@ -1,8 +1,6 @@
-﻿using Kanban.Application.Common.Interfaces;
-using Kanban.Domain;
+﻿using Dapper;
 using Microsoft.Data.Sqlite;
 using Microsoft.Extensions.Configuration;
-using Dapper;
 using System.Data;
 
 namespace Kanban.Infrastructure.Data;
@@ -36,12 +34,12 @@ public class DataContext
                     Conteudo TEXT
                 );
             """;
-            if(connection is not null)
+            if (connection is not null)
             {
                 await connection.ExecuteAsync(sql);
             }
 
-            
+
         }
     }
 }

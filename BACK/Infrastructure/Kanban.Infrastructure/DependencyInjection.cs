@@ -1,5 +1,4 @@
-﻿using Kanban.Application.Common.Interfaces;
-using Kanban.Application.Common.Interfaces.Persistence;
+﻿using Kanban.Application.Common.Interfaces.Persistence;
 using Kanban.Infrastructure.Data;
 using Kanban.Infrastructure.Data.Persistence.Repositories;
 using Microsoft.Extensions.Configuration;

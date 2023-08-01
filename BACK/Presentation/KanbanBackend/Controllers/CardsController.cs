@@ -1,7 +1,5 @@
 using Kanban.Application.Common.Interfaces.Services;
 using Kanban.Application.Common.Models.Request;
-using Kanban.Domain;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
 namespace KanbanBackend.Controllers;
@@ -73,12 +71,12 @@ public class CardsController : ControllerBase
             return Ok(listOfCards);
 
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             _logger.LogError($"[CardsController.GetAll] Error: {ex.Message}");
             return BadRequest(ex.Message);
         }
-        
+
     }
 
     [HttpDelete("{id}")]
