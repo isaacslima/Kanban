@@ -1,5 +1,6 @@
 using Kanban.Application.Common.Interfaces.Services;
 using Kanban.Application.Common.Models.Request;
+using Kanban.Domain;
 using Microsoft.AspNetCore.Mvc;
 
 namespace KanbanBackend.Controllers;
@@ -18,15 +19,41 @@ public class CardsController : ControllerBase
     }
 
     [HttpPost]
-    public IActionResult InsertCard(CreateCardRequest createCardRequest)
+    public IActionResult InsertCard(CardRequest cardRequest)
     {
         try
         {
-            var card = _cardService.InsertCard(createCardRequest);
+            var card = _cardService.InsertCard(cardRequest);
 
-            return Ok(createCardRequest);
+            return Ok(cardRequest);
         }
         catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
+    }
+
+    [HttpPut("{id}")]
+    public IActionResult UpdateCard(Guid id, CardRequest cardRequest)
+    {
+        //Todo get card
+        //NotFound();
+
+        try
+        {
+            var card = new Card
+            {
+                Id = id,
+                Conteudo = cardRequest.conteudo,
+                Lista = cardRequest.lista,
+                Titulo = cardRequest.titulo
+            };
+
+            _cardService.Update(card);
+
+            return Ok(card);
+
+        }catch (Exception ex)
         {
             return BadRequest(ex.Message);
         }
