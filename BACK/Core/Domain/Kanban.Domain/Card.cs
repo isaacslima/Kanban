@@ -10,15 +10,25 @@ public class Card
 
     public string Lista { get; set; } = null!;
 
-    public bool IsValid()
+    public string[] ValidateProperties()
     {
-        if (string.IsNullOrEmpty(Titulo) ||
-            string.IsNullOrEmpty(Conteudo) ||
-            string.IsNullOrEmpty(Lista))
+        var unvalidProperties = new List<string>();
+
+        if (string.IsNullOrEmpty(Titulo))
         {
-            return false;
+            unvalidProperties.Add(nameof(Titulo));
         }
 
-        return true;
+        if (string.IsNullOrEmpty(Conteudo))
+        {
+            unvalidProperties.Add(nameof(Conteudo));
+        }
+
+        if (string.IsNullOrEmpty(Lista))
+        {
+            unvalidProperties.Add(nameof(Lista));
+        }
+
+        return unvalidProperties.ToArray();
     }
 }

@@ -26,28 +26,32 @@ public class CardService : ICardService
             Titulo = cardRequest.titulo
         };
 
-        if (card.IsValid())
-        {
-            await _cardRepository.CreateCardAsync(card);
-            return card;
-        }
+        ValidateCard(card);
 
-        return null;
+        await _cardRepository.CreateCardAsync(card);
+        return card;
+    }
+
+    private void ValidateCard(Card card)
+    {
+        var unvalidProperties = card.ValidateProperties();
+        if (unvalidProperties.Count() > 0)
+        {
+            var properties = string.Join(",", unvalidProperties);
+
+            throw (new Exception($"O(s) campo(s) obrigatório(s) não foi(foram) preenchido(s) Campos: {properties}"));
+        }
     }
 
     public async Task<Card> Update(Card card)
     {
-        if (card.IsValid())
-        {
+        ValidateCard(card);
 
-            await _cardRepository.Update(card);
+        await _cardRepository.Update(card);
 
-            var date = DateTime.Now;
-            _logger.LogInformation($"{date.ToString("dd/MM/yyyy HH:mm:ss")} - Card {card.Id} - {card.Titulo} - Alterado");
-            return card;
-        }
-
-        return null;
+        var date = DateTime.Now;
+        _logger.LogInformation($"{date.ToString("dd/MM/yyyy HH:mm:ss")} - Card {card.Id} - {card.Titulo} - Alterado");
+        return card;
     }
 
     public async Task RemoveCard(Card card)
