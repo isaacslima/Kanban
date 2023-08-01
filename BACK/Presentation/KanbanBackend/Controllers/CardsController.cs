@@ -53,7 +53,8 @@ public class CardsController : ControllerBase
 
             return Ok(card);
 
-        }catch (Exception ex)
+        }
+        catch (Exception ex)
         {
             return BadRequest(ex.Message);
         }

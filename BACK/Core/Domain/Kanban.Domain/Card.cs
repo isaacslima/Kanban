@@ -12,8 +12,8 @@ public class Card
 
     public bool IsValid()
     {
-        if (string.IsNullOrEmpty(Titulo) || 
-            string.IsNullOrEmpty(Conteudo) || 
+        if (string.IsNullOrEmpty(Titulo) ||
+            string.IsNullOrEmpty(Conteudo) ||
             string.IsNullOrEmpty(Lista))
         {
             return false;

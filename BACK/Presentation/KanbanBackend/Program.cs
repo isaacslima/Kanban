@@ -1,5 +1,5 @@
-using Kanban.Infrastructure;
 using Kanban.Application;
+using Kanban.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
