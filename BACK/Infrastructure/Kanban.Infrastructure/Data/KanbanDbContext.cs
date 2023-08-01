@@ -1,20 +1,47 @@
 ﻿using Kanban.Application.Common.Interfaces;
 using Kanban.Domain;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.Data.Sqlite;
+using Microsoft.Extensions.Configuration;
+using Dapper;
+using System.Data;
 
 namespace Kanban.Infrastructure.Data;
 
-public class KanbanDbContext : DbContext, IKanbanDbContext
+public class DataContext
 {
-    public KanbanDbContext(DbContextOptions<KanbanDbContext> options) : base(options)
+    protected readonly IConfiguration Configuration;
+
+    public DataContext(IConfiguration configuration)
     {
-        Database.EnsureCreated();
+        Configuration = configuration;
     }
 
-    public DbSet<Card> Cards { get; set; }
-
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    public IDbConnection CreateConnection()
     {
-        base.OnModelCreating(modelBuilder);
+        return new SqliteConnection(Configuration.GetConnectionString("KanbanDatabase"));
+    }
+
+    public async Task Init()
+    {
+        using var connection = CreateConnection();
+        await _initCards();
+        async Task _initCards()
+        {
+            var sql = """
+                CREATE TABLE IF NOT EXISTS 
+                Cards (
+                    Id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+                    Titulo TEXT,
+                    Lista TEXT,
+                    Conteudo TEXT
+                );
+            """;
+            if(connection is not null)
+            {
+                await connection.ExecuteAsync(sql);
+            }
+
+            
+        }
     }
 }

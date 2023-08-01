@@ -6,7 +6,8 @@ namespace Kanban.Application.Common.Interfaces.Services;
 public interface ICardService
 {
     Task<IEnumerable<Card>> GetAllCards();
+    Task<Card> GetById(int id);
     Task<Card> InsertCard(CardRequest cardRequest);
-    Task<IEnumerable<Card>> RemoveCard(Card card);
+    Task RemoveCard(Card card);
     Task<Card> Update(Card card);
 }
