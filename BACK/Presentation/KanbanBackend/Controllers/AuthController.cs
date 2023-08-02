@@ -1,11 +1,8 @@
-﻿using Kanban.Application.Common.Interfaces.Services;
-using Kanban.Application.Common.Models.Request;
+﻿using Kanban.Application.Common.Models.Request;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
-using Microsoft.Extensions.Configuration;
-using System;
 
 namespace KanbanBackend.Controllers;
 
