@@ -12,6 +12,8 @@ public static class DependencyInjection
     {
         services.AddSingleton<DataContext>();
 
+        services.AddSingleton<IConfiguration>(configuration);
+
         services.AddScoped<ICardRepository, CardRepository>();
 
         return services;

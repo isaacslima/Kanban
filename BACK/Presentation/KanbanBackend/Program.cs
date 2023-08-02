@@ -1,6 +1,9 @@
 using Kanban.Application;
 using Kanban.Infrastructure;
 using Kanban.Infrastructure.Data;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +12,23 @@ ConfigurationManager configuration = builder.Configuration;
 
 services.AddInfrastructure(configuration)
         .AddApplication();
+
+services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+        .AddJwtBearer(options =>
+        {
+            options.TokenValidationParameters = new TokenValidationParameters
+            {
+                ValidateIssuer = true,
+                ValidateAudience = true,
+                ValidateLifetime = true,
+                ValidateIssuerSigningKey = true,
+
+                ValidIssuer =  configuration["Jwt:Issuer"],
+                ValidAudience = configuration["Jwt:Audience"],
+                IssuerSigningKey = new SymmetricSecurityKey
+            (Encoding.UTF8.GetBytes(configuration["Jwt:Key"]))
+            };
+        });
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();

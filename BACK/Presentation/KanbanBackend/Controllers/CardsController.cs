@@ -1,11 +1,12 @@
 using Kanban.Application.Common.Interfaces.Services;
 using Kanban.Application.Common.Models.Request;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace KanbanBackend.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("cards")]
 public class CardsController : ControllerBase
 {
     private readonly ILogger<CardsController> _logger;
@@ -17,6 +18,7 @@ public class CardsController : ControllerBase
         _cardService = cardService;
     }
 
+    [Authorize]
     [HttpPost]
     public async Task<IActionResult> InsertCard(CardRequest cardRequest)
     {
@@ -33,6 +35,7 @@ public class CardsController : ControllerBase
         }
     }
 
+    [Authorize]
     [HttpPut("{id}")]
     public async Task<IActionResult> UpdateCard(int id, CardRequest cardRequest)
     {
@@ -61,6 +64,7 @@ public class CardsController : ControllerBase
         }
     }
 
+    [Authorize]
     [HttpGet]
     public async Task<IActionResult> GetAll()
     {
@@ -79,6 +83,7 @@ public class CardsController : ControllerBase
 
     }
 
+    [Authorize]
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(int id)
     {
