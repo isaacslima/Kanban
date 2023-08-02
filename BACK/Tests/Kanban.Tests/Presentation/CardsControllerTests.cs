@@ -73,7 +73,7 @@ namespace Kanban.Tests.Presentation
             var cardRequest = new CardRequest("titulo", "conteudo", "lista");
 
             _mockCardService.Setup(service => service.GetById(id))
-                            .ReturnsAsync((Card)null);
+                            .ReturnsAsync((Card)null!);
 
             var result = await _controller.UpdateCard(id, cardRequest);
 
@@ -139,7 +139,7 @@ namespace Kanban.Tests.Presentation
             var id = 1;
 
             _mockCardService.Setup(service => service.GetById(id))
-                            .ReturnsAsync((Card)null);
+                            .ReturnsAsync((Card)null!);
 
             var result = await _controller.Delete(id);
 

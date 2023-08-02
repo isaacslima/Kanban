@@ -1,12 +1,15 @@
 using Kanban.Application.Common.Interfaces.Services;
 using Kanban.Application.Common.Models.Request;
+using Kanban.Domain;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace KanbanBackend.Controllers;
 
 [ApiController]
 [Route("cards")]
+
 public class CardsController : ControllerBase
 {
     private readonly ILogger<CardsController> _logger;
@@ -18,7 +21,6 @@ public class CardsController : ControllerBase
         _cardService = cardService;
     }
 
-    [Authorize]
     [HttpPost]
     public async Task<IActionResult> InsertCard(CardRequest cardRequest)
     {
@@ -35,7 +37,6 @@ public class CardsController : ControllerBase
         }
     }
 
-    [Authorize]
     [HttpGet]
     public async Task<IActionResult> GetAll()
     {
@@ -54,9 +55,8 @@ public class CardsController : ControllerBase
 
     }
 
-    [Authorize]
     [HttpPut("{id}")]
-    public async Task<IActionResult> UpdateCard(int id, CardRequest cardRequest)
+    public async Task<ActionResult<Card>> UpdateCard(int id, CardRequest cardRequest)
     {
         try
         {
@@ -83,7 +83,6 @@ public class CardsController : ControllerBase
         }
     }
 
-    [Authorize]
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(int id)
     {
@@ -96,9 +95,9 @@ public class CardsController : ControllerBase
                 return NotFound();
             }
 
-            await _cardService.RemoveCard(card);
+            var listOfRemaingCards = await _cardService.RemoveCard(card);
 
-            return Ok(card);
+            return Ok(listOfRemaingCards);
 
         }
         catch (Exception ex)
