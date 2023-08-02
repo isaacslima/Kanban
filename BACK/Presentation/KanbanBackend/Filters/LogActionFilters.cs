@@ -28,21 +28,30 @@ public class LogActionFilter : IActionFilter
             var controller = context.Controller as ControllerBase;
             var action = context.ActionDescriptor.DisplayName;
 
-            if (context.HttpContext.Request.Method == "PUT")
+            var routeData = context.RouteData;
+
+            var controllerName = routeData.Values["controller"];
+            var actionName = routeData.Values["action"];
+
+            if(controllerName is not null && controllerName.Equals("Cards"))
             {
-                var id = context.RouteData.Values["id"];
-                var okResult = context.Result as OkObjectResult;
-                var card = okResult?.Value as Card;
+                if (actionName is not null && actionName.Equals("UpdateCard"))
+                {
+                    var id = routeData.Values["id"];
+                    var okResult = context.Result as OkObjectResult;
+                    var card = okResult?.Value as Card;
 
-                _logger.LogInformation($"{DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss")} - Card {id} - {card?.Titulo} - Alterado");
+                    _logger.LogInformation($"{DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss")} - Card {id} - {card?.Titulo} - Alterado");
+                }
+                else if (actionName is not null && actionName.Equals("DeleteCard"))
+                {
+                    var id = routeData.Values["id"];
 
+                    _logger.LogInformation($"{DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss")} - Card {id} - Removido");
+                }
             }
-            else if (context.HttpContext.Request.Method == "DELETE")
-            {
-                var id = context.RouteData.Values["id"];
 
-                _logger.LogInformation($"{DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss")} - Card {id} - Removido");
-            }
+            
         }
     }
 }

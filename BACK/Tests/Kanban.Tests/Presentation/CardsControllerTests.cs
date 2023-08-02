@@ -47,7 +47,7 @@ namespace Kanban.Tests.Presentation
         public async Task UpdateCard_ExistingCard_ReturnsOkResultWithUpdatedCard()
         {
             var id = 1;
-            var cardRequest = new CardRequest("titulo", "conteudo", "lista");
+            var cardRequest = new CardRequest("novo titulo", "novo conteudo", "nova lista");
             var existingCard = new Card
             {
                 Id = 1,
@@ -58,6 +58,16 @@ namespace Kanban.Tests.Presentation
 
             _mockCardService.Setup(service => service.GetById(id))
                             .ReturnsAsync(existingCard);
+
+            var newCardToUpdate = new Card
+            {
+                Id = 1,
+                Conteudo = "novo conteudo",
+                Lista = "nova lista",
+                Titulo = "novo titulo"
+            };
+
+            _mockCardService.Setup(service => service.Update(newCardToUpdate));
 
             var result = await _controller.UpdateCard(id, cardRequest);
 
@@ -115,7 +125,24 @@ namespace Kanban.Tests.Presentation
         public async Task Delete_ExistingCard_ReturnsOkResultWithDeletedCard()
         {
             var id = 1;
-            var existingCard = new Card
+            var listCards = new List<Card>(){
+                new Card
+                {
+                    Id = 2,
+                    Conteudo = "conteudo",
+                    Lista = "lista",
+                    Titulo = "titulo"
+                },
+                new Card
+                {
+                    Id = 3,
+                    Conteudo = "conteudo",
+                    Lista = "lista",
+                    Titulo = "titulo"
+                },
+            };
+
+            var cardToRemove = new Card
             {
                 Id = 1,
                 Conteudo = "conteudo",
@@ -123,14 +150,18 @@ namespace Kanban.Tests.Presentation
                 Titulo = "titulo"
             };
 
+
             _mockCardService.Setup(service => service.GetById(id))
-                            .ReturnsAsync(existingCard);
+                            .ReturnsAsync(cardToRemove);
+
+            _mockCardService.Setup(service => service.RemoveCard(cardToRemove))
+                            .ReturnsAsync(listCards);
 
             var result = await _controller.Delete(id);
 
             var okResult = Assert.IsType<OkObjectResult>(result);
-            var response = Assert.IsType<Card>(okResult.Value);
-            Assert.Equal(existingCard, response);
+            var response = Assert.IsType<List<Card>>(okResult.Value);
+            Assert.Equal(listCards, response);
         }
 
         [Fact]

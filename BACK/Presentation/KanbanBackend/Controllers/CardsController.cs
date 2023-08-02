@@ -56,7 +56,7 @@ public class CardsController : ControllerBase
     }
 
     [HttpPut("{id}")]
-    public async Task<ActionResult<Card>> UpdateCard(int id, CardRequest cardRequest)
+    public async Task<IActionResult> UpdateCard(int id, CardRequest cardRequest)
     {
         try
         {
@@ -84,7 +84,7 @@ public class CardsController : ControllerBase
     }
 
     [HttpDelete("{id}")]
-    public async Task<IActionResult> Delete(int id)
+    public async Task<IActionResult> DeleteCard(int id)
     {
         try
         {
