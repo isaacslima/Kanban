@@ -24,7 +24,7 @@ public class AuthController : ControllerBase
         if (resultado)
         {
             var tokenString = GerarTokenJWT();
-            return Ok(new { token = tokenString });
+            return Ok(tokenString);
         }
         else
         {
