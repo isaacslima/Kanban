@@ -28,7 +28,7 @@ public class CardsController : ControllerBase
         {
             var card = await _cardService.InsertCard(cardRequest);
 
-            return Ok(card);
+            return CreatedAtAction(nameof(InsertCard), new { id = card.Id }, card);
         }
         catch (Exception ex)
         {
