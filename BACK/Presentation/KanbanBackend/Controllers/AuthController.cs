@@ -20,7 +20,7 @@ public class AuthController : ControllerBase
     }
 
     [HttpPost("login")]
-    public async Task<IActionResult> Login([FromBody] LoginRequest loginRequest)
+    public IActionResult Login([FromBody] LoginRequest loginRequest)
     {
         bool resultado = ValidarUsuario(loginRequest);
 
@@ -33,8 +33,6 @@ public class AuthController : ControllerBase
         {
             return Unauthorized();
         }
-
-        return BadRequest();
     }
 
     private string GerarTokenJWT()
@@ -42,7 +40,9 @@ public class AuthController : ControllerBase
         var issuer = _config["Jwt:Issuer"];
         var audience = _config["Jwt:Audience"];
         var expiry = DateTime.Now.AddMinutes(120);
-        var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
+        var key = _config["Jwt:Key"];
+
+        var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key));
         var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
         var token = new JwtSecurityToken(issuer: issuer, audience: audience,
 expires: DateTime.Now.AddMinutes(120), signingCredentials: credentials);
@@ -52,7 +52,7 @@ expires: DateTime.Now.AddMinutes(120), signingCredentials: credentials);
     }
     private bool ValidarUsuario(LoginRequest loginRequest)
     {
-        if (loginRequest.login == "login" && loginRequest.senha == "senha")
+        if (loginRequest.login == "letscode" && loginRequest.senha == "lets@123")
         {
             return true;
         }
