@@ -38,7 +38,7 @@ namespace Kanban.Tests.Presentation
 
             var result = await _controller.InsertCard(cardRequest);
 
-            var okResult = Assert.IsType<OkObjectResult>(result);
+            var okResult = Assert.IsType<CreatedAtActionResult>(result);
             var response = Assert.IsType<Card>(okResult.Value);
             Assert.Equal(insertedCard, response);
         }
@@ -157,7 +157,7 @@ namespace Kanban.Tests.Presentation
             _mockCardService.Setup(service => service.RemoveCard(cardToRemove))
                             .ReturnsAsync(listCards);
 
-            var result = await _controller.Delete(id);
+            var result = await _controller.DeleteCard(id);
 
             var okResult = Assert.IsType<OkObjectResult>(result);
             var response = Assert.IsType<List<Card>>(okResult.Value);
@@ -172,7 +172,7 @@ namespace Kanban.Tests.Presentation
             _mockCardService.Setup(service => service.GetById(id))
                             .ReturnsAsync((Card)null!);
 
-            var result = await _controller.Delete(id);
+            var result = await _controller.DeleteCard(id);
 
             Assert.IsType<NotFoundResult>(result);
         }
@@ -237,7 +237,7 @@ namespace Kanban.Tests.Presentation
             _mockCardService.Setup(service => service.RemoveCard(It.IsAny<Card>()))
                             .ThrowsAsync(new Exception(errorMessage));
 
-            var result = await _controller.Delete(id);
+            var result = await _controller.DeleteCard(id);
 
             var badRequestResult = Assert.IsType<BadRequestObjectResult>(result);
             Assert.Equal(errorMessage, badRequestResult.Value);

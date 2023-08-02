@@ -1,9 +1,6 @@
-﻿using Kanban.Application.Common.Models.Request;
-using Kanban.Domain;
+﻿using Kanban.Domain;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
-using System;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace KanbanBackend.Filters;
 public class LogActionFilter : IActionFilter
@@ -33,7 +30,7 @@ public class LogActionFilter : IActionFilter
             var controllerName = routeData.Values["controller"];
             var actionName = routeData.Values["action"];
 
-            if(controllerName is not null && controllerName.Equals("Cards"))
+            if (controllerName is not null && controllerName.Equals("Cards"))
             {
                 if (actionName is not null && actionName.Equals("UpdateCard"))
                 {
@@ -51,7 +48,7 @@ public class LogActionFilter : IActionFilter
                 }
             }
 
-            
+
         }
     }
 }

@@ -24,7 +24,7 @@ public class AuthController : ControllerBase
         if (resultado)
         {
             var tokenString = GerarTokenJWT();
-            return Ok(new { token = tokenString });
+            return Ok(tokenString);
         }
         else
         {
@@ -46,6 +46,7 @@ public class AuthController : ControllerBase
         var stringToken = tokenHandler.WriteToken(token);
         return stringToken;
     }
+
     private bool ValidarUsuario(LoginRequest loginRequest)
     {
         if (loginRequest.login == "letscode" && loginRequest.senha == "lets@123")
