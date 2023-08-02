@@ -7,8 +7,6 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
-var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
-
 var builder = WebApplication.CreateBuilder(args);
 
 var services = builder.Services;
@@ -58,7 +56,6 @@ services.AddCors(options =>
 });
 
 var app = builder.Build();
-
 
 {
     using var scope = app.Services.CreateScope();

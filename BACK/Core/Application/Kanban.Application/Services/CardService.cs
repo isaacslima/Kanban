@@ -2,7 +2,6 @@
 using Kanban.Application.Common.Interfaces.Services;
 using Kanban.Application.Common.Models.Request;
 using Kanban.Domain;
-using Microsoft.Extensions.Logging;
 
 namespace Kanban.Application.Services;
 
@@ -57,7 +56,7 @@ public class CardService : ICardService
 
         var deleted = await _cardRepository.Delete(card.Id);
 
-        if(deleted == 1)
+        if (deleted == 1)
         {
             return await GetAllCards();
         }

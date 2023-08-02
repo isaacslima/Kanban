@@ -1,9 +1,6 @@
 using Kanban.Application.Common.Interfaces.Services;
 using Kanban.Application.Common.Models.Request;
-using Kanban.Domain;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace KanbanBackend.Controllers;
 
