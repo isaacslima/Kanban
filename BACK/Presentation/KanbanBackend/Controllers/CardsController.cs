@@ -36,6 +36,25 @@ public class CardsController : ControllerBase
     }
 
     [Authorize]
+    [HttpGet]
+    public async Task<IActionResult> GetAll()
+    {
+        try
+        {
+            var listOfCards = await _cardService.GetAllCards();
+
+            return Ok(listOfCards);
+
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError($"[CardsController.GetAll] Error: {ex.Message}");
+            return BadRequest(ex.Message);
+        }
+
+    }
+
+    [Authorize]
     [HttpPut("{id}")]
     public async Task<IActionResult> UpdateCard(int id, CardRequest cardRequest)
     {
@@ -62,25 +81,6 @@ public class CardsController : ControllerBase
             _logger.LogError($"[CardsController.UpdateCard] Error: {ex.Message}");
             return BadRequest(ex.Message);
         }
-    }
-
-    [Authorize]
-    [HttpGet]
-    public async Task<IActionResult> GetAll()
-    {
-        try
-        {
-            var listOfCards = await _cardService.GetAllCards();
-
-            return Ok(listOfCards);
-
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError($"[CardsController.GetAll] Error: {ex.Message}");
-            return BadRequest(ex.Message);
-        }
-
     }
 
     [Authorize]

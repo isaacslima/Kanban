@@ -5,11 +5,6 @@ using KanbanBackend.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Kanban.Tests.Presentation
 {
@@ -30,8 +25,8 @@ namespace Kanban.Tests.Presentation
         public async Task InsertCard_ValidRequest_ReturnsOkResult()
         {
             var cardRequest = new CardRequest("titulo", "conteudo", "lista");
-            var insertedCard = new Card 
-            { 
+            var insertedCard = new Card
+            {
                 Id = 1,
                 Conteudo = "conteudo",
                 Lista = "lista",
@@ -88,7 +83,7 @@ namespace Kanban.Tests.Presentation
         [Fact]
         public async Task GetAll_ReturnsListOfCards()
         {
-            var listOfCards = new List<Card> 
+            var listOfCards = new List<Card>
             {
                 new Card
                 {

@@ -27,9 +27,11 @@ public class CardRepository : ICardRepository
         using var connection = _context.CreateConnection();
         var sql = """
             INSERT INTO Cards (Titulo, Conteudo, Lista)
-            VALUES (@Titulo, @Conteudo, @Lista)
+            VALUES (@Titulo, @Conteudo, @Lista);
+            SELECT last_insert_rowid();
         """;
-        await connection.ExecuteAsync(sql, card);
+        var newCardId = await connection.ExecuteScalarAsync<int>(sql, card);
+        card.Id = newCardId;
     }
 
     public async Task<Card> GetById(int id)
