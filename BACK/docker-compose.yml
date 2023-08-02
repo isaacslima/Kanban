@@ -1,0 +1,14 @@
+version: "3.8"
+services:
+    api:
+        build: .
+        depends_on:
+        - db
+        
+    db:
+        image: keinos/sqlite3:latest
+    
+networks:
+  my-network:
+    name: my-network
+    driver: bridge

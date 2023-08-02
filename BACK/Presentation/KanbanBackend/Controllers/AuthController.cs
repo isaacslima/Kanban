@@ -46,6 +46,7 @@ public class AuthController : ControllerBase
         var stringToken = tokenHandler.WriteToken(token);
         return stringToken;
     }
+
     private bool ValidarUsuario(LoginRequest loginRequest)
     {
         if (loginRequest.login == "letscode" && loginRequest.senha == "lets@123")
