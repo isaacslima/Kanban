@@ -1,0 +1,13 @@
+﻿using Kanban.Application.Common.Models.Request;
+using Kanban.Domain;
+
+namespace Kanban.Application.Common.Interfaces.Services;
+
+public interface ICardService
+{
+    Task<IEnumerable<Card>> GetAllCards();
+    Task<Card> GetById(int id);
+    Task<Card> InsertCard(CardRequest cardRequest);
+    Task RemoveCard(Card card);
+    Task<Card> Update(Card card);
+}
