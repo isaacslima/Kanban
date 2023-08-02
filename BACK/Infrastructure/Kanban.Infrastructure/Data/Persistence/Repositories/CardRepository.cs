@@ -27,9 +27,11 @@ public class CardRepository : ICardRepository
         using var connection = _context.CreateConnection();
         var sql = """
             INSERT INTO Cards (Titulo, Conteudo, Lista)
-            VALUES (@Titulo, @Conteudo, @Lista)
+            VALUES (@Titulo, @Conteudo, @Lista);
+            SELECT last_insert_rowid();
         """;
-        await connection.ExecuteAsync(sql, card);
+        var newCardId = await connection.ExecuteScalarAsync<int>(sql, card);
+        card.Id = newCardId;
     }
 
     public async Task<Card> GetById(int id)
@@ -55,13 +57,13 @@ public class CardRepository : ICardRepository
         await connection.ExecuteAsync(sql, card);
     }
 
-    public async Task Delete(int id)
+    public async Task<int> Delete(int id)
     {
         using var connection = _context.CreateConnection();
         var sql = """
             DELETE FROM Cards 
             WHERE Id = @id
         """;
-        await connection.ExecuteAsync(sql, new { id });
+        return await connection.ExecuteAsync(sql, new { id });
     }
 }

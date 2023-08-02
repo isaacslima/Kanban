@@ -21,6 +21,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kanban.Infrastructure", "In
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KanbanBackend", "Presentation\KanbanBackend\KanbanBackend.csproj", "{B834EB79-89B6-4EF8-A062-E6448330BF0D}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{57243B89-243D-4EB7-AD54-7A0426764FEF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kanban.Tests", "Tests\Kanban.Tests\Kanban.Tests.csproj", "{D1B43BAD-B13A-45A9-8EF5-068AB16D4313}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -43,6 +47,10 @@ Global
 		{B834EB79-89B6-4EF8-A062-E6448330BF0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B834EB79-89B6-4EF8-A062-E6448330BF0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B834EB79-89B6-4EF8-A062-E6448330BF0D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D1B43BAD-B13A-45A9-8EF5-068AB16D4313}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D1B43BAD-B13A-45A9-8EF5-068AB16D4313}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D1B43BAD-B13A-45A9-8EF5-068AB16D4313}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D1B43BAD-B13A-45A9-8EF5-068AB16D4313}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -54,6 +62,7 @@ Global
 		{FE76E785-3059-4D5C-8A94-3303ED6BF3C0} = {4C45D9D8-F425-4621-8925-17561730D353}
 		{EAC1E9AE-34ED-4CE9-8508-55AF46B621B6} = {AB907B03-C302-4C09-B8FF-241929CB1CC0}
 		{B834EB79-89B6-4EF8-A062-E6448330BF0D} = {6EE1D5B1-2C44-45CE-89DA-4C94A34CE8BC}
+		{D1B43BAD-B13A-45A9-8EF5-068AB16D4313} = {57243B89-243D-4EB7-AD54-7A0426764FEF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E76B788D-20B1-48E8-973C-E1EA8DE5DB7A}

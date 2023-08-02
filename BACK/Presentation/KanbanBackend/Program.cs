@@ -1,6 +1,8 @@
 using Kanban.Application;
 using Kanban.Infrastructure;
 using Kanban.Infrastructure.Data;
+using KanbanBackend;
+using KanbanBackend.Filters;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
@@ -25,24 +27,34 @@ services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 ValidateLifetime = true,
                 ValidateIssuerSigningKey = true,
 
+                ClockSkew = TimeSpan.Zero,
+
                 ValidIssuer = configuration["Jwt:Issuer"],
                 ValidAudience = configuration["Jwt:Audience"],
                 IssuerSigningKey = new SymmetricSecurityKey
-                 (Encoding.UTF8.GetBytes(configuration["Jwt:Key"]))
+                 (Encoding.UTF8.GetBytes(configuration["Jwt:Key"]!))
             };
         });
 
-builder.Services.AddControllers();
+builder.Services.AddControllers(options =>
+{
+    options.Filters.Add(typeof(LogActionFilter));
+});
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 services.AddCors(options =>
 {
-    options.AddPolicy(name: MyAllowSpecificOrigins,
-                      policy =>
-                      {
-                          policy.WithOrigins("http://localhost:3000/");
-                      });
+    options.AddPolicy(name: "AllowedCorsOrigins",
+                builder =>
+                {
+                    builder
+                        .SetIsOriginAllowed(Helpers.IsOriginAllowed)
+                        .AllowAnyHeader()
+                        .AllowAnyMethod()
+                        .AllowCredentials();
+                });
 });
 
 var app = builder.Build();
@@ -64,7 +76,7 @@ app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
-app.UseCors(MyAllowSpecificOrigins);
+app.UseCors("AllowedCorsOrigins");
 
 app.MapControllers();
 

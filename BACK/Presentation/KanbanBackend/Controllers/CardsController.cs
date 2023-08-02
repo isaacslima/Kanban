@@ -1,12 +1,15 @@
 using Kanban.Application.Common.Interfaces.Services;
 using Kanban.Application.Common.Models.Request;
+using Kanban.Domain;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace KanbanBackend.Controllers;
 
 [ApiController]
 [Route("cards")]
+
 public class CardsController : ControllerBase
 {
     private readonly ILogger<CardsController> _logger;
@@ -18,7 +21,6 @@ public class CardsController : ControllerBase
         _cardService = cardService;
     }
 
-    [Authorize]
     [HttpPost]
     public async Task<IActionResult> InsertCard(CardRequest cardRequest)
     {
@@ -26,7 +28,7 @@ public class CardsController : ControllerBase
         {
             var card = await _cardService.InsertCard(cardRequest);
 
-            return Ok(card);
+            return CreatedAtAction(nameof(InsertCard), new { id = card.Id }, card);
         }
         catch (Exception ex)
         {
@@ -35,7 +37,24 @@ public class CardsController : ControllerBase
         }
     }
 
-    [Authorize]
+    [HttpGet]
+    public async Task<IActionResult> GetAll()
+    {
+        try
+        {
+            var listOfCards = await _cardService.GetAllCards();
+
+            return Ok(listOfCards);
+
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError($"[CardsController.GetAll] Error: {ex.Message}");
+            return BadRequest(ex.Message);
+        }
+
+    }
+
     [HttpPut("{id}")]
     public async Task<IActionResult> UpdateCard(int id, CardRequest cardRequest)
     {
@@ -64,28 +83,8 @@ public class CardsController : ControllerBase
         }
     }
 
-    [Authorize]
-    [HttpGet]
-    public async Task<IActionResult> GetAll()
-    {
-        try
-        {
-            var listOfCards = await _cardService.GetAllCards();
-
-            return Ok(listOfCards);
-
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError($"[CardsController.GetAll] Error: {ex.Message}");
-            return BadRequest(ex.Message);
-        }
-
-    }
-
-    [Authorize]
     [HttpDelete("{id}")]
-    public async Task<IActionResult> Delete(int id)
+    public async Task<IActionResult> DeleteCard(int id)
     {
         try
         {
@@ -96,9 +95,9 @@ public class CardsController : ControllerBase
                 return NotFound();
             }
 
-            await _cardService.RemoveCard(card);
+            var listOfRemaingCards = await _cardService.RemoveCard(card);
 
-            return Ok(card);
+            return Ok(listOfRemaingCards);
 
         }
         catch (Exception ex)

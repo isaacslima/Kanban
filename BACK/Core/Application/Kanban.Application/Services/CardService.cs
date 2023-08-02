@@ -8,12 +8,10 @@ namespace Kanban.Application.Services;
 
 public class CardService : ICardService
 {
-    public readonly ILogger<Card> _logger;
     public readonly ICardRepository _cardRepository;
 
-    public CardService(ILogger<Card> logger, ICardRepository cardRepository)
+    public CardService(ICardRepository cardRepository)
     {
-        _logger = logger;
         _cardRepository = cardRepository;
     }
 
@@ -50,16 +48,21 @@ public class CardService : ICardService
         await _cardRepository.Update(card);
 
         var date = DateTime.Now;
-        _logger.LogInformation($"{date.ToString("dd/MM/yyyy HH:mm:ss")} - Card {card.Id} - {card.Titulo} - Alterado");
         return card;
     }
 
-    public async Task RemoveCard(Card card)
+    public async Task<IEnumerable<Card>> RemoveCard(Card card)
     {
         var date = DateTime.Now;
-        _logger.LogInformation($"{date.ToString("dd/MM/yyyy HH:mm:ss")} - Card {card.Id} - {card.Titulo} - Removido");
 
-        await _cardRepository.Delete(card.Id);
+        var deleted = await _cardRepository.Delete(card.Id);
+
+        if(deleted == 1)
+        {
+            return await GetAllCards();
+        }
+
+        throw (new Exception("Não foi possível remover o card"));
     }
 
     public async Task<IEnumerable<Card>> GetAllCards()
